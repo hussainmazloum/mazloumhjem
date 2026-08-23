@@ -1,0 +1,47 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.bilde {
+    width: 30%;
+    height: auto;
+    padding-top: 75px;
+}
+.p {
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-align:justify;
+    width: 50%;
+    margin-top: 25px;
+    color: black;
+}
+
+
+@media (max-width: 780px) {
+    #container{
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .p {
+    margin: 15px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    text-align:justify;
+    width: 100%;
+    padding: 15px;
+    
+}
+
+.bilde{
+width: 50%;
+}
+    
+}

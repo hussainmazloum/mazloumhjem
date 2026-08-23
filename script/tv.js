@@ -1,0 +1,413 @@
+/*
+function toggleMenu() {
+
+    document.getElementById("menu").classList.toggle("show");
+
+}
+
+function toggleTipp(event) {
+
+    event.preventDefault();
+
+    document.getElementById("tippMenu").classList.toggle("show");
+
+}
+*/
+
+
+const postContainer = document.getElementById("container");
+
+
+fetch("bilder.json")
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! status: ${response.status}`);
+
+        }
+
+        return response.json();
+
+    })
+
+
+    .then(jsonData => {
+
+
+        // ==================================================
+        // Antall kanaler
+        // ==================================================
+
+        const antallKanaler = document.createElement("p");
+
+        antallKanaler.classList.add("antallKanaler");
+
+        antallKanaler.innerHTML =
+            `Antall kanaler: <span class="kanal">${jsonData.length}</span>`;
+
+
+        // ==================================================
+        // Søkeinput
+        // ==================================================
+
+        const searchInput = document.createElement("input");
+
+        searchInput.type = "text";
+
+        searchInput.id = "finne";
+
+        searchInput.placeholder = "Søk kanal...";
+
+
+        // ==================================================
+        // Antall + søk
+        // ==================================================
+
+        const oneLine = document.createElement("div");
+
+        oneLine.classList.add("oneLine");
+
+        oneLine.append(
+            antallKanaler,
+            searchInput
+        );
+
+        postContainer.appendChild(oneLine);
+
+
+        // ==================================================
+        // Søk etter kanal
+        // ==================================================
+
+        searchInput.addEventListener("input", function () {
+
+            const searchText =
+                this.value.toLowerCase().trim();
+
+            const channels =
+                document.querySelectorAll(
+                    "#channels .channel"
+                );
+
+
+            channels.forEach(channel => {
+
+                const channelName =
+                    channel.textContent
+                        .toLowerCase()
+                        .trim();
+
+
+                if (channelName.includes(searchText)) {
+
+                    channel.style.display = "";
+
+                } else {
+
+                    channel.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+
+        // ==================================================
+        // عناصر المشغل
+        // ==================================================
+
+        const channelList =
+            document.getElementById("channels");
+
+        const video =
+            document.getElementById("video");
+
+        const channelName =
+            document.getElementById("channelName");
+
+        const ytPlayer =
+            document.getElementById("ytPlayer");
+
+
+        // HLS
+        let hls = null;
+
+
+        // ==================================================
+        // تشغيل القناة
+        // ==================================================
+
+        function playStream(url, name, type, icon) {
+
+
+            console.log("Playing:", name);
+
+            console.log("Type:", type);
+
+            console.log("URL:", url);
+
+
+            // --------------------------------------------------
+            // اسم القناة
+            // --------------------------------------------------
+
+            channelName.innerHTML =
+                `<img src="${icon}" class="player-icon">${name}`;
+
+
+            // --------------------------------------------------
+            // إخفاء المشغلين
+            // --------------------------------------------------
+
+            video.style.display = "none";
+
+            ytPlayer.style.display = "none";
+
+
+            // ==================================================
+            // YOUTUBE
+            // ==================================================
+
+            if (type === "youtube") {
+
+
+                // إيقاف IPTV
+                video.pause();
+
+                video.removeAttribute("src");
+
+                video.load();
+
+
+                // تدمير HLS
+                if (hls) {
+
+                    hls.destroy();
+
+                    hls = null;
+
+                }
+
+
+                // إظهار YouTube
+                ytPlayer.style.display = "block";
+
+
+                // حذف الفيديو القديم
+                ytPlayer.src = "";
+
+
+                // تشغيل YouTube
+                ytPlayer.src =
+                    `https://www.youtube.com/embed/${url}?autoplay=1`;
+
+
+                return;
+            }
+
+
+            // ==================================================
+            // IPTV
+            // ==================================================
+
+
+            // إيقاف YouTube
+            ytPlayer.src = "";
+
+
+            // إيقاف الفيديو القديم
+            video.pause();
+
+            video.removeAttribute("src");
+
+            video.load();
+
+
+            // تدمير HLS القديم
+            if (hls) {
+
+                hls.destroy();
+
+                hls = null;
+
+            }
+
+
+            // إظهار الفيديو
+            video.style.display = "block";
+
+
+            // ==================================================
+            // Native HLS
+            // Safari / iPhone / iPad
+            // ==================================================
+
+            if (
+                video.canPlayType(
+                    "application/vnd.apple.mpegurl"
+                )
+            ) {
+
+
+                console.log(
+                    "Using Native HLS:",
+                    name
+                );
+
+
+                video.src = url;
+
+
+                video.addEventListener(
+                    "loadedmetadata",
+                    function () {
+
+                        video.play().catch(error => {
+
+                            console.log(
+                                "Play error:",
+                                error
+                            );
+
+                        });
+
+                    },
+                    { once: true }
+                );
+
+
+            }
+
+
+            // ==================================================
+            // HLS.js
+            // Chrome / Edge / Firefox
+            // ==================================================
+
+            else if (Hls.isSupported()) {
+
+    console.log("Using HLS.js:", name);
+    console.log("URL:", url);
+
+    hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: true
+    });
+
+    hls.attachMedia(video);
+
+    hls.loadSource(url);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+
+        console.log("MANIFEST_PARSED:", name);
+
+        video.play().catch(error => {
+            console.log("Play error:", error);
+        });
+
+    });
+
+    hls.on(Hls.Events.ERROR, function (event, data) {
+
+        console.log("HLS ERROR:", data);
+
+    });
+}
+
+
+            // ==================================================
+            // المتصفح لا يدعم HLS
+            // ==================================================
+
+            else {
+
+                console.log(
+                    "HLS is not supported by this browser."
+                );
+
+            }
+
+        }
+
+
+        // ==================================================
+        // إنشاء القنوات
+        // ==================================================
+
+        jsonData.forEach(channel => {
+
+
+            const div =
+                document.createElement("div");
+
+
+            div.className = "channel";
+
+
+            div.innerHTML =
+                `<img src="${channel.icon}" class="channel-icon">
+                 ${channel.name}`;
+
+
+            // عند الضغط
+            div.onclick = () => {
+
+                playStream(
+                    channel.url,
+                    channel.name,
+                    channel.type,
+                    channel.icon
+                );
+
+            };
+
+
+            channelList.appendChild(div);
+
+        });
+
+
+        // ==================================================
+        // الساعة
+        // ==================================================
+
+        function updateClock() {
+
+            const now = new Date();
+
+            const display =
+                now.toLocaleTimeString();
+
+            document.getElementById("clock").textContent =
+                display;
+
+        }
+
+
+        setInterval(
+            updateClock,
+            1000
+        );
+
+
+        updateClock();
+
+    })
+
+
+    // ==================================================
+    // خطأ تحميل JSON
+    // ==================================================
+
+    .catch(error => {
+
+        console.error(
+            "Feil ved lasting av bilder.json:",
+            error
+        );
+
+    });

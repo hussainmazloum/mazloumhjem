@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../image/mazLogo.png" />
+    <title>Mazloums hjemmeside</title>
+    <link rel="stylesheet" href="css/tv.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- HLS.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  </head>
+
+  <body>
+    <main id="container"></main>
+
+    <div class="inneholder">
+      <div id="channels"></div>
+
+      <div id="player">
+        <div class="top">
+          <div id="clock"></div>
+
+          <h2 id="channelName">TV-kanaler</h2>
+        </div>
+
+        <!-- YouTube -->
+        <iframe
+          id="ytPlayer"
+          style="display: none"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        >
+        </iframe>
+
+        <!-- HLS / Video -->
+        <video
+          id="video"
+          controls
+          autoplay
+          preload="auto"
+          poster="../image/mazzlogo.png"
+        ></video>
+      </div>
+    </div>
+
+    <script src="script/tv.js"></script>
+    <script src="script/main.js"></script>
+  </body>
+</html>

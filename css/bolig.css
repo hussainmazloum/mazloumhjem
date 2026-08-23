@@ -1,0 +1,341 @@
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.sokBox{
+  position: relative;
+    display: flex;
+    justify-content:flex-end;
+    align-items:center;
+    width:80%;
+    margin-top: 10px;
+
+    z-index: 100;
+     
+}
+
+.sokKnappBtn{
+  position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #8b8989;
+    
+}
+
+
+.knappBtn{
+    width: 150px;
+    height: 35px;
+    background-color: #f4a261;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    border-radius: 50px;
+    border:none;
+    
+}
+
+.knappBtn:focus-visible{
+  outline: none;
+  border: 0.5px solid #615f5f;
+
+}
+
+.knappBtn:hover{
+    background-color: rgb(224, 224, 224);
+    color: #999999;
+}
+
+
+.sokInput{
+    width: 250px;
+    height: 30px;
+    
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 550;
+    color: gray;
+    border-radius: 8px;
+    border:0.5px solid gray;
+}
+
+input:focus {
+  outline: none;
+  border: 0.5px solid #f4a261;
+}
+
+/* hiemme piler i input / Chrome, Edge, Safari */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+#bildet{
+    width: 100px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.title{
+  font-size: 45px;
+  color: gray;
+  margin: 0 auto;
+  padding-top: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+#setning {
+  color: #f4a261;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+.beregnInput{ /* Div som inneholder input av boligInput*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    gap: 10px;
+    flex-wrap: wrap;
+    
+}
+
+.boligInput{ /* Input som inneholder Lån, Rente og Løpetid */
+    width: 200px;
+    height: 35px;
+    border-radius: 8px;
+    padding-left: 15px;
+    
+    font-size: 18px;
+    font-weight: 550;
+    color: #8b8989;
+
+    border: 0.5px solid gray;
+}
+
+.knapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    gap: 20px;
+
+}
+
+#resultaterBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    gap: 5px;
+    
+    border: 1px solid rgb(202, 200, 197);
+ }
+
+.result{
+    font-size: 16px;
+    font-weight: 550;
+    color: #8b8989;
+    width: 350px;
+    height: auto;
+
+    text-align:center;
+    padding: 15px; 
+    border-left: 0.5px solid rgb(202, 200, 197);
+}
+
+
+#tabel {
+    width: 100%;
+    max-width: 1410px;
+    border-collapse: collapse;
+    text-align: center;
+
+    color: #8b8989;
+    font-weight: 550;
+    font-size: 18px;
+    
+}
+
+
+#tabel td {
+    border: 0.5px solid #fff;
+    padding: 10px;
+    
+}
+
+#tabel th {
+    border: 0.5px solid #fff;
+    padding: 10px;
+
+    background-color: #f4f4f4;
+    position: sticky;
+    top: 0;
+    z-index:102;
+    
+}
+
+#tabel tbody tr:nth-child(even) {
+    background-color:hsla(212, 71%, 82%, 0.536);
+}
+
+#tabel tbody tr:hover {
+    background-color: #8b8989;
+    color: #eee;
+}
+
+.content {
+    max-height: 500px;
+    overflow-y: auto;
+
+}
+
+.table-container {
+    width: 80%;
+    max-height: 500px;
+    overflow-y: auto;
+    border: 0.5px solid #fff;
+}
+
+#tableHead th {
+    position: sticky;
+    top: 0;
+    background:#f4a261;
+    color: white;
+    z-index:103;
+}
+
+.content {
+    overflow-y: auto;
+    
+}
+.search-row {
+    background-color: #56b754 !important;
+    color: white;
+    font-weight: bold;
+}
+
+
+.informasjon {
+    display: none;
+    position: fixed;
+    z-index: 104;
+    padding: 12px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.red{
+  color: #f4a261;
+}
+
+
+
+
+@media (max-width: 780px) {
+  #container {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .sokBox{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #title {
+    font-size: clamp(30px, 4vw, 36px);
+  }
+  #setning {
+    font-size: clamp(20px, 4vw, 36px);
+  }
+  
+  #bildet {
+    width: 70px;
+  }
+  .beregnInput{
+    width: 100%;
+  }
+
+.boligInput{
+  width: 90%; 
+}
+
+.sokInput{
+  font-weight: 100;
+}
+
+  .knappBtn{
+    width:100%;
+    font-weight: 300;
+    
+  }
+
+  #resultaterBox{
+  width: 100%;
+  
+}
+
+  .result{
+    font-size: 14px;
+    padding:5px 0;
+  }
+
+  
+  #tabel {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+
+    color: #8b8989;
+    font-weight: 300;
+    font-size: 18px;
+    
+}
+
+  #tabel th {
+    font-size: 12px;
+    padding: 5px 0;
+    font-weight:500;
+  }
+  #tabel td {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 550;
+  }
+
+  .table-container{
+    width: 100%;
+    max-height:500px;
+    overflow-y:auto;
+}
+
+.sokBox{
+    max-width:250px;   
+}
+
+
+}

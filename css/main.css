@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* bildet med text */
+#header-top {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    padding: 10px 0 5px 10px;
+}
+
+
+/* bildet */
+#bilde {
+    width: 50px;
+    height: auto;
+}
+
+
+/* tekst */
+#header-text {
+    margin: 0;
+    font-size: 18px;
+}
+
+
+/* meny-knapp */
+#menuBtn {
+    display: none;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+
+/* list */
+.title-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    list-style: none;
+
+    border-top: 0.5px solid gray;
+    border-bottom: 0.5px solid gray;
+
+    background-color: white;
+}
+
+
+/* list elementer */
+.title-buttons li {
+    cursor: pointer;
+    color: #918f8f;
+    padding: 10px;
+}
+
+.title-buttons li:hover {
+    color: #f4a261;
+}
+
+
+/* footer */
+.copy {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 8px 0;
+    background-color: #f4a261;
+    color: white;
+    z-index: 1000;
+}
+
+
+/* hovedmeny med undermeny */
+.tipping-menu,
+.calculator-menu {
+    position: relative;
+    cursor: pointer;
+    z-index: 200;
+}
+
+
+/* undermeny */
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    list-style: none;
+    min-width: 140px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: 0 5px 5px 0;
+}
+
+
+/* desktop - hover */
+.tipping-menu:hover .sub-menu,
+.calculator-menu:hover .sub-menu {
+    display: block;
+}
+
+
+.sub-menu li {
+    display: block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.sub-menu li:hover {
+    background-color: #f4a261;
+    color: white;
+}
+
+/* الكمبيوتر */
+@media (min-width: 781px) {
+
+    .tipping-menu:hover .sub-menu,
+    .calculator-menu:hover .sub-menu {
+        display: block;
+    }
+
+}
+
+
+/* ========================= */
+/*        MOBIL             */
+/* ========================= */
+
+@media (max-width: 780px) {
+
+    .copy {
+        font-size: 15px;
+    }
+
+
+    /* زر ☰ */
+    #menuBtn {
+        display: block;
+        width: 80%;
+        margin: 5px auto;
+    }
+
+
+    /* القائمة مخفية */
+    #menu {
+        display: none;
+    }
+
+
+    /* القائمة عند الضغط على ☰ */
+    #menu.show {
+         display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+
+    #menu.show > li {
+        width: 100%;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+
+    /* إلغاء hover للـ submenu على الهاتف */
+    /* .tipping-menu:hover .sub-menu,
+    .calculator-menu:hover .sub-menu {
+        display: none;
+    } */
+
+    .sub-menu.show {
+        display: block;
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+        box-shadow: none;
+        border-radius: 0;
+    }
+}
