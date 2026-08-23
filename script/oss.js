@@ -1,7 +1,7 @@
 const postContainer = document.getElementById("container");
 
 const souraa = document.createElement("img")
-souraa.src = "image/logomazloum.png";
+souraa.src = "logomazloum.png";
 const tekst = document.createElement("p");
 const linje = document.createElement("hr");
 const arab = document.createElement("h4");
