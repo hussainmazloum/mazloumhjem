@@ -1,7 +1,7 @@
 const postContainer = document.getElementById("container");
 
-const soura = document.createElement("img")
-soura.src = "../image/logomazloum.png";
+const souraa = document.createElement("img")
+souraa.src = "../image/logomazloum.png";
 const tekst = document.createElement("p");
 const linje = document.createElement("hr");
 const arab = document.createElement("h4");
@@ -15,11 +15,11 @@ This is a personal, experimental, non-profit project created to be freely availa
 
 arab.textContent="هذا مشروع شخصي وتجريبي غير ربحي، أُنشئ ليكون متاحًا للجميع للاستفادة منه والاستمتاع باستخدامه. يوفّر الموقع مجموعة من البرامج الترفيهية والقنوات التلفزيونية بالإضافة الى البرامج الحسابية والأدوات العملية التي تساعد في إنجاز بعض الحسابات الضريبية وحساب القروض اليومية بسهولة. ولإضفاء طابع أكثر جاذبية، أضفت لمسات إبداعية وفنية بسيطة إلى تصميم الموقع، مع الحرص على تطويره باستمرار وإضافة مزايا وتحسينات جديدة في المستقبل."
 
-soura.classList.add("soura");
+soura.classList.add("souraa");
 tekst.classList.add("p");
 arab.classList.add("h4");
 
-postContainer.appendChild(soura);
+postContainer.appendChild(souraa);
 postContainer.appendChild(tekst);
 postContainer.appendChild(linje);
 postContainer.appendChild(arab);
