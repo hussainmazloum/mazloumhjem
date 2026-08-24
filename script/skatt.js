@@ -138,12 +138,12 @@ const headRow = document.createElement("tr");
 
 const overskrifter = [
     "Navn",
-    "Bruttlønn",
+    "Bruttolønn",
     "Skatt",
-    "Skatttrekk",
+    "Skattetrekk",
     "Nettolønn",
     "Telefon",
-    "Oppdatere"
+    "Oppdater"
 ];
 
 overskrifter.forEach((tekst) => {
