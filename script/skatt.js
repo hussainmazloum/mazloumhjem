@@ -143,7 +143,7 @@ const overskrifter = [
     "Skatttrekk",
     "Nettolønn",
     "Telefon",
-    ""
+    "Oppdatere"
 ];
 
 overskrifter.forEach((tekst) => {
