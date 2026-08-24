@@ -1000,6 +1000,12 @@
      "type": "hls"
   },
 
+  {
+    "name": "Nile cinema",
+    "url": "https://93.184.10.248/NileCinema/tracks-v1a1/mono.m3u8",
+    "icon":"images/alkass6.png",
+     "type": "hls"
+  },
 
    {
     "name": "Bein Sport",
