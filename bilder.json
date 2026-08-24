@@ -722,7 +722,7 @@
   },
   {
     "name": "Roya_Comedy",
-    "url": "https://fast.kwikmotion.com/roya/comedy/playlist/kmfast_4.m3u8",
+    "url": "https://fast.kwikmotion.com/roya/comedy/playlist/kmfast_2.m3u8",
     "icon":"images/roya_2.png",
      "type": "hls"
   },
@@ -794,31 +794,31 @@
   },
   {
     "name": "Roya_Kitchen",
-    "url": "https://fast.kwikmotion.com/roya/kitchen/playlist/kmfast_4.m3u8",
+    "url": "https://fast.kwikmotion.com/roya/kitchen/playlist/kmfast_2.m3u8",
     "icon":"images/roya_7.png",
      "type": "hls"
   },
   {
     "name": "Roya_Doc",
-    "url": "https://fast.kwikmotion.com/roya/documentaries/playlist/kmfast_4.m3u8",
+    "url": "https://fast.kwikmotion.com/roya/documentaries/playlist/kmfast_2.m3u8",
     "icon":"images/roya_4.png",
      "type": "hls"
   },
   {
     "name": "Roya_Kids_org",
-    "url": "https://fast.kwikmotion.com/roya/kids/playlist/kmfast_4.m3u8",
+    "url": "https://fast.kwikmotion.com/roya/kids/playlist/kmfast_2.m3u8",
     "icon":"images/roya_kids.png",
      "type": "hls"
   },
   {
     "name": "Roya_Adv.",
-    "url": "https://fast.kwikmotion.com/roya/roya_adventures/playlist/kmfast_4.m3u8",
+    "url": "https://fast.kwikmotion.com/roya/roya_adventures/playlist/kmfast_2.m3u8",
     "icon":"images/roya_7.png",
      "type": "hls"
   },
   {
     "name": "Roya_Palestine",
-    "url": "https://fast.kwikmotion.com/roya/roya_palestine/playlist/kmfast_4.m3u8",
+    "url": "https://fast.kwikmotion.com/roya/roya_palestine/playlist/kmfast_2.m3u8",
     "icon":"images/roya_1.png",
      "type": "hls"
   },
