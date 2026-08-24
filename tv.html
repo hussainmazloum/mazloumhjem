@@ -47,5 +47,17 @@
 
     <script src="script/tv.js"></script>
     <script src="script/main.js"></script>
+
+    <script> 
+      //For å forhindre høyre knapp, men dette er ikke reell beskyttelse fordi brukeren kan deaktivere den.
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+      
+      // Du kan blokkere noen snarveier:
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "F12") {
+          e.preventDefault();
+        }
+      });
+    </script>
   </body>
 </html>
