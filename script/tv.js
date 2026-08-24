@@ -1,19 +1,3 @@
-/*
-function toggleMenu() {
-
-    document.getElementById("menu").classList.toggle("show");
-
-}
-
-function toggleTipp(event) {
-
-    event.preventDefault();
-
-    document.getElementById("tippMenu").classList.toggle("show");
-
-}
-*/
-
 
 const postContainer = document.getElementById("container");
 
@@ -116,7 +100,7 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // عناصر المشغل
+        // Operatorelementer
         // ==================================================
 
         const channelList =
@@ -137,7 +121,7 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // تشغيل القناة
+        // Operator kanaler
         // ==================================================
 
         function playStream(url, name, type, icon) {
@@ -151,7 +135,7 @@ fetch("bilder.json")
 
 
             // --------------------------------------------------
-            // اسم القناة
+            // Kanalnavn
             // --------------------------------------------------
 
             channelName.innerHTML =
@@ -159,7 +143,7 @@ fetch("bilder.json")
 
 
             // --------------------------------------------------
-            // إخفاء المشغلين
+            // Skjul operatorer
             // --------------------------------------------------
 
             video.style.display = "none";
@@ -174,7 +158,7 @@ fetch("bilder.json")
             if (type === "youtube") {
 
 
-                // إيقاف IPTV
+                // stopp IPTV
                 video.pause();
 
                 video.removeAttribute("src");
@@ -182,7 +166,7 @@ fetch("bilder.json")
                 video.load();
 
 
-                // تدمير HLS
+                // ødelegge HLS
                 if (hls) {
 
                     hls.destroy();
@@ -192,15 +176,15 @@ fetch("bilder.json")
                 }
 
 
-                // إظهار YouTube
+                // Vise YouTube
                 ytPlayer.style.display = "block";
 
 
-                // حذف الفيديو القديم
+                // Fjerne den gamle video
                 ytPlayer.src = "";
 
 
-                // تشغيل YouTube
+                // Spill YouTube
                 ytPlayer.src =
                     `https://www.youtube.com/embed/${url}?autoplay=1`;
 
@@ -214,11 +198,11 @@ fetch("bilder.json")
             // ==================================================
 
 
-            // إيقاف YouTube
+            // Stopp YouTube
             ytPlayer.src = "";
 
 
-            // إيقاف الفيديو القديم
+            // Stoppe den gamle video
             video.pause();
 
             video.removeAttribute("src");
@@ -226,7 +210,7 @@ fetch("bilder.json")
             video.load();
 
 
-            // تدمير HLS القديم
+            // Ødelegge den gamle HLS 
             if (hls) {
 
                 hls.destroy();
@@ -236,7 +220,7 @@ fetch("bilder.json")
             }
 
 
-            // إظهار الفيديو
+            // Vise video
             video.style.display = "block";
 
 
@@ -320,7 +304,7 @@ fetch("bilder.json")
 
 
             // ==================================================
-            // المتصفح لا يدعم HLS
+            // Hvis browser does not support HLS
             // ==================================================
 
             else {
@@ -335,7 +319,7 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // إنشاء القنوات
+        // Opprette kanaler
         // ==================================================
 
         jsonData.forEach(channel => {
@@ -372,7 +356,7 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // الساعة
+        // klokka
         // ==================================================
 
         function updateClock() {
@@ -400,7 +384,7 @@ fetch("bilder.json")
 
 
     // ==================================================
-    // خطأ تحميل JSON
+    // JSON-innlastingsfeil
     // ==================================================
 
     .catch(error => {
