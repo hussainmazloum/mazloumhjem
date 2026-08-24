@@ -76,9 +76,9 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 80%;
+    width: 100%;
     text-align: center;
-    margin: 0 10%;
+    margin: 0;
     padding: 8px 0;
     background-color: #f4a261;
     color: white;
@@ -195,10 +195,5 @@ body {
         margin-top: 10px;
         box-shadow: none;
         border-radius: 0;
-    }
-
-    .copy{
-        width: 100%;
-        margin: 0 ;
     }
 }
