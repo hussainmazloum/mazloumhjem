@@ -115,12 +115,12 @@ lagreEndringBtn.type = "button";
 lagreEndringBtn.textContent ="Endre";
 lagreEndringBtn.classList.add("skattKnappBtn");
 
-const lukkeBtn = document.createElement("button");
-lukkeBtn.type = "button";
-lukkeBtn.textContent = "Lukke";
-lukkeBtn.classList.add("skattKnappBtn");
+const lukkeBtnSkatt = document.createElement("button");
+lukkeBtnSkatt.type = "button";
+lukkeBtnSkatt.textContent = "Lukke";
+lukkeBtnSkatt.classList.add("skattKnappBtn");
 
-skattKnapper.append(skattBeregnBtn, lagreEndringBtn, lukkeBtn);
+skattKnapper.append(skattBeregnBtn, lagreEndringBtn, lukkeBtnSkatt);
 postContainer.appendChild(skattKnapper);
 
 
@@ -543,8 +543,9 @@ function lagreEndring() {
 
 //----------------------------------------- Lukke knappen -------------------------------------
 
-lukkeBtn.addEventListener("click", () => {
-    Swal.fire({
+lukkeBtnSkatt.addEventListener("click", () => {
+
+  Swal.fire({
     width: 300,
     title: "Er du sikker?",
     text: "Du vil forlate siden!",
@@ -555,17 +556,24 @@ lukkeBtn.addEventListener("click", () => {
     confirmButtonText: "Ja, lukk!",
     cancelButtonText: "Avbryt"
   }).then((result) => {
+
     if (result.isConfirmed) {
+
       Swal.fire({
         width: 300,
         title: "Lukket!",
         text: "Du blir sendt til forsiden.",
         icon: "success"
       }).then(() => {
+
         window.top.location.href = "../index.html";
+
       });
+
     }
-});
+
+  });
+
 });
 
 
