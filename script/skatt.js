@@ -566,7 +566,7 @@ lukkeBtnSkatt.addEventListener("click", () => {
         icon: "success"
       }).then(() => {
 
-        window.top.location.href = "../index.html";
+        window.top.location.href = "/mazloumhjem/index.html";
 
       });
 
