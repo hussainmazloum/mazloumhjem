@@ -351,7 +351,8 @@ fjernBtn.addEventListener("click", () => {
 });
 
 lukkeBtn.addEventListener("click", () => {
-    Swal.fire({
+
+  Swal.fire({
     width: 300,
     title: "Er du sikker?",
     text: "Du vil forlate siden!",
@@ -362,17 +363,24 @@ lukkeBtn.addEventListener("click", () => {
     confirmButtonText: "Ja, lukk!",
     cancelButtonText: "Avbryt"
   }).then((result) => {
+
     if (result.isConfirmed) {
+
       Swal.fire({
         width: 300,
         title: "Lukket!",
         text: "Du blir sendt til forsiden.",
         icon: "success"
       }).then(() => {
+
         window.top.location.href = "../index.html";
+
       });
+
     }
-});
+
+  });
+
 });
 
 
