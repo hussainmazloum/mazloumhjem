@@ -42,6 +42,8 @@ fetch("bilder.json")
 
         searchInput.id = "finne";
 
+        searchInput.autocomplete="off"
+
         searchInput.placeholder = "Søk kanal...";
 
 
