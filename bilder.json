@@ -373,6 +373,13 @@
   },
 
   {
+    "name": "Cartoon Network",
+    "url": "21hAlnDFTLw",
+    "icon":"images/CN.png",
+    "type": "youtube"
+  },
+
+  {
     "name": "Masha and Bear ",
     "url": "S_6wjcgw1mk",
     "icon":"images/masha.png",
