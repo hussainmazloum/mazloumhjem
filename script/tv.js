@@ -1,27 +1,26 @@
-
 const postContainer = document.getElementById("container");
 
+// ==================================================
+// LOAD bilder.json
+// ==================================================
 
 fetch("bilder.json")
 
     .then(response => {
 
         if (!response.ok) {
-
-            throw new Error(`HTTP error! status: ${response.status}`);
-
+            throw new Error(
+                `HTTP error! status: ${response.status}`
+            );
         }
 
         return response.json();
-
     })
-
 
     .then(jsonData => {
 
-
         // ==================================================
-        // Antall kanaler
+        // ANTALL KANALER
         // ==================================================
 
         const antallKanaler = document.createElement("p");
@@ -33,22 +32,19 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // Søkeinput
+        // SØKEINPUT
         // ==================================================
 
         const searchInput = document.createElement("input");
 
         searchInput.type = "text";
-
         searchInput.id = "finne";
-
-        searchInput.autocomplete="off"
-
+        searchInput.autocomplete = "off";
         searchInput.placeholder = "Søk kanal...";
 
 
         // ==================================================
-        // Antall + søk
+        // ANTALL + SØK
         // ==================================================
 
         const oneLine = document.createElement("div");
@@ -64,7 +60,7 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // Søk etter kanal
+        // SØK ETTER KANAL
         // ==================================================
 
         searchInput.addEventListener("input", function () {
@@ -77,7 +73,6 @@ fetch("bilder.json")
                     "#channels .channel"
                 );
 
-
             channels.forEach(channel => {
 
                 const channelName =
@@ -85,15 +80,10 @@ fetch("bilder.json")
                         .toLowerCase()
                         .trim();
 
-
                 if (channelName.includes(searchText)) {
-
                     channel.style.display = "";
-
                 } else {
-
                     channel.style.display = "none";
-
                 }
 
             });
@@ -102,7 +92,7 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // Operatorelementer
+        // ELEMENTS
         // ==================================================
 
         const channelList =
@@ -118,38 +108,108 @@ fetch("bilder.json")
             document.getElementById("ytPlayer");
 
 
-        // HLS
+        // ==================================================
+        // PLAYERS
+        // ==================================================
+
         let hls = null;
+        let dashPlayer = null;
 
 
         // ==================================================
-        // Operator kanaler
+        // STOP HLS
+        // ==================================================
+
+        function stopHLS() {
+
+            if (hls) {
+
+                console.log("Stopping HLS");
+
+                hls.destroy();
+
+                hls = null;
+            }
+        }
+
+
+        // ==================================================
+        // STOP DASH
+        // ==================================================
+
+        function stopDASH() {
+
+            if (dashPlayer) {
+
+                console.log("Stopping DASH");
+
+                dashPlayer.reset();
+
+                dashPlayer = null;
+            }
+        }
+
+
+        // ==================================================
+        // STOP VIDEO
+        // ==================================================
+
+        function stopVideo() {
+
+            video.pause();
+
+            video.removeAttribute("src");
+
+            video.load();
+        }
+
+
+        // ==================================================
+        // STOP EVERYTHING
+        // ==================================================
+
+        function stopEverything() {
+
+            // YouTube
+            ytPlayer.src = "";
+
+            // Video
+            stopVideo();
+
+            // HLS
+            stopHLS();
+
+            // DASH
+            stopDASH();
+        }
+
+
+        // ==================================================
+        // PLAY STREAM
         // ==================================================
 
         function playStream(url, name, type, icon) {
 
-
+            console.log("================================");
             console.log("Playing:", name);
-
             console.log("Type:", type);
-
             console.log("URL:", url);
+            console.log("================================");
 
 
-            // --------------------------------------------------
-            // Kanalnavn
-            // --------------------------------------------------
+            // ==================================================
+            // CHANNEL NAME
+            // ==================================================
 
             channelName.innerHTML =
                 `<img src="${icon}" class="player-icon">${name}`;
 
 
-            // --------------------------------------------------
-            // Skjul operatorer
-            // --------------------------------------------------
+            // ==================================================
+            // HIDE PLAYERS
+            // ==================================================
 
             video.style.display = "none";
-
             ytPlayer.style.display = "none";
 
 
@@ -159,37 +219,22 @@ fetch("bilder.json")
 
             if (type === "youtube") {
 
+                console.log(
+                    "Using YouTube:",
+                    name
+                );
 
-                // stopp IPTV
-                video.pause();
+                // Stop IPTV
+                stopVideo();
+                stopHLS();
+                stopDASH();
 
-                video.removeAttribute("src");
-
-                video.load();
-
-
-                // ødelegge HLS
-                if (hls) {
-
-                    hls.destroy();
-
-                    hls = null;
-
-                }
-
-
-                // Vise YouTube
+                // Show YouTube
                 ytPlayer.style.display = "block";
 
-
-                // Fjerne den gamle video
-                ytPlayer.src = "";
-
-
-                // Spill YouTube
+                // YouTube
                 ytPlayer.src =
                     `https://www.youtube.com/embed/${url}?autoplay=1`;
-
 
                 return;
             }
@@ -199,35 +244,141 @@ fetch("bilder.json")
             // IPTV
             // ==================================================
 
+            console.log(
+                "IPTV channel:",
+                name
+            );
 
-            // Stopp YouTube
+
+            // Stop YouTube
             ytPlayer.src = "";
 
 
-            // Stoppe den gamle video
-            video.pause();
-
-            video.removeAttribute("src");
-
-            video.load();
+            // Stop old video
+            stopVideo();
 
 
-            // Ødelegge den gamle HLS 
-            if (hls) {
-
-                hls.destroy();
-
-                hls = null;
-
-            }
+            // Stop HLS
+            stopHLS();
 
 
-            // Vise video
+            // Stop DASH
+            stopDASH();
+
+
+            // Show video
             video.style.display = "block";
 
 
             // ==================================================
-            // Native HLS
+            // CHECK URL
+            // ==================================================
+
+            if (!url) {
+
+                console.error(
+                    "Channel URL is empty:",
+                    name
+                );
+
+                return;
+            }
+
+
+            // ==================================================
+            // DETECT MPD
+            // ==================================================
+
+            const isMPD =
+                url.toLowerCase().includes(".mpd");
+
+
+            // ==================================================
+            // DASH / MPD
+            // ==================================================
+
+            // ==================================================
+// DASH / MPD
+// ==================================================
+
+if (isMPD) {
+
+    console.log("================================");
+    console.log("DASH DETECTED");
+    console.log("Channel:", name);
+    console.log("URL:", url);
+    console.log("================================");
+
+    if (typeof dashjs === "undefined") {
+
+        console.error("dash.js is NOT loaded!");
+
+        return;
+    }
+
+    dashPlayer = dashjs.MediaPlayer().create();
+
+    // مهم: لا نبدأ التشغيل تلقائياً هنا
+    dashPlayer.initialize(
+        video,
+        url,
+        false
+    );
+
+    dashPlayer.on(
+        dashjs.MediaPlayer.events.STREAM_INITIALIZED,
+        function () {
+
+            console.log(
+                "DASH STREAM INITIALIZED:",
+                name
+            );
+
+            video.play().then(() => {
+
+                console.log(
+                    "DASH VIDEO PLAYING:",
+                    name
+                );
+
+            }).catch(error => {
+
+                console.error(
+                    "DASH PLAY ERROR:",
+                    error
+                );
+
+            });
+
+        }
+    );
+
+    dashPlayer.on(
+        dashjs.MediaPlayer.events.ERROR,
+        function (event) {
+
+            console.error(
+                "================================"
+            );
+
+            console.error(
+                "DASH ERROR:",
+                event
+            );
+
+            console.error(
+                "================================"
+            );
+
+        }
+    );
+
+    return;
+}
+
+
+            // ==================================================
+            // NATIVE HLS
             // Safari / iPhone / iPad
             // ==================================================
 
@@ -237,10 +388,14 @@ fetch("bilder.json")
                 )
             ) {
 
-
                 console.log(
                     "Using Native HLS:",
                     name
+                );
+
+                console.log(
+                    "HLS URL:",
+                    url
                 );
 
 
@@ -251,9 +406,14 @@ fetch("bilder.json")
                     "loadedmetadata",
                     function () {
 
+                        console.log(
+                            "HLS metadata loaded:",
+                            name
+                        );
+
                         video.play().catch(error => {
 
-                            console.log(
+                            console.error(
                                 "Play error:",
                                 error
                             );
@@ -261,71 +421,152 @@ fetch("bilder.json")
                         });
 
                     },
-                    { once: true }
+                    {
+                        once: true
+                    }
                 );
 
 
+                return;
             }
 
 
             // ==================================================
-            // HLS.js
+            // HLS.JS
             // Chrome / Edge / Firefox
             // ==================================================
 
-            else if (Hls.isSupported()) {
-
-    console.log("Using HLS.js:", name);
-    console.log("URL:", url);
-
-    hls = new Hls({
-        enableWorker: true,
-        lowLatencyMode: true
-    });
-
-    hls.attachMedia(video);
-
-    hls.loadSource(url);
-
-    hls.on(Hls.Events.MANIFEST_PARSED, function () {
-
-        console.log("MANIFEST_PARSED:", name);
-
-        video.play().catch(error => {
-            console.log("Play error:", error);
-        });
-
-    });
-
-    hls.on(Hls.Events.ERROR, function (event, data) {
-
-        console.log("HLS ERROR:", data);
-
-    });
-}
-
-
-            // ==================================================
-            // Hvis browser does not support HLS
-            // ==================================================
-
-            else {
+            if (
+                typeof Hls !== "undefined" &&
+                Hls.isSupported()
+            ) {
 
                 console.log(
-                    "HLS is not supported by this browser."
+                    "Using HLS.js:",
+                    name
                 );
 
+                console.log(
+                    "HLS URL:",
+                    url
+                );
+
+
+                // Create HLS
+                hls = new Hls({
+
+                    enableWorker: true,
+
+                    lowLatencyMode: true
+
+                });
+
+
+                // Attach video
+                hls.attachMedia(video);
+
+
+                // Load stream
+                hls.loadSource(url);
+
+
+                // Manifest loaded
+                hls.on(
+                    Hls.Events.MANIFEST_PARSED,
+                    function () {
+
+                        console.log(
+                            "MANIFEST_PARSED:",
+                            name
+                        );
+
+
+                        video.play().catch(error => {
+
+                            console.error(
+                                "Play error:",
+                                error
+                            );
+
+                        });
+
+                    }
+                );
+
+
+                // HLS errors
+                hls.on(
+                    Hls.Events.ERROR,
+                    function (event, data) {
+
+                        console.error(
+                            "HLS ERROR:",
+                            data
+                        );
+
+
+                        if (data.fatal) {
+
+                            switch (data.type) {
+
+                                case Hls.ErrorTypes.NETWORK_ERROR:
+
+                                    console.error(
+                                        "Fatal network error"
+                                    );
+
+                                    hls.startLoad();
+
+                                    break;
+
+
+                                case Hls.ErrorTypes.MEDIA_ERROR:
+
+                                    console.error(
+                                        "Fatal media error"
+                                    );
+
+                                    hls.recoverMediaError();
+
+                                    break;
+
+
+                                default:
+
+                                    console.error(
+                                        "Fatal HLS error"
+                                    );
+
+                                    stopHLS();
+
+                                    break;
+                            }
+                        }
+
+                    }
+                );
+
+
+                return;
             }
+
+
+            // ==================================================
+            // NOT SUPPORTED
+            // ==================================================
+
+            console.error(
+                "Browser does not support HLS/DASH."
+            );
 
         }
 
 
         // ==================================================
-        // Opprette kanaler
+        // CREATE CHANNELS
         // ==================================================
 
         jsonData.forEach(channel => {
-
 
             const div =
                 document.createElement("div");
@@ -339,7 +580,10 @@ fetch("bilder.json")
                  ${channel.name}`;
 
 
-            // عند الضغط
+            // ==================================================
+            // CLICK CHANNEL
+            // ==================================================
+
             div.onclick = () => {
 
                 playStream(
@@ -358,7 +602,7 @@ fetch("bilder.json")
 
 
         // ==================================================
-        // klokka
+        // CLOCK
         // ==================================================
 
         function updateClock() {
@@ -366,11 +610,10 @@ fetch("bilder.json")
             const now = new Date();
 
             const display =
-                now.toLocaleTimeString();
+                now.toLocaleTimeString("no-NO");
 
             document.getElementById("clock").textContent =
                 display;
-
         }
 
 
@@ -386,7 +629,7 @@ fetch("bilder.json")
 
 
     // ==================================================
-    // JSON-innlastingsfeil
+    // JSON ERROR
     // ==================================================
 
     .catch(error => {

@@ -268,6 +268,13 @@
   },
 
   {
+    "name": "Aflam arabi direct",
+    "url": "Va6QU9n3q18",
+    "icon":"images/aflam.png",
+    "type": "youtube"
+  },
+
+  {
     "name": "NBN",
     "url": "https://93-115-18-51.nip.io/hls/live.m3u8",
     "icon":"images/NBN.png",
@@ -499,6 +506,20 @@
   },
 
   {
+    "name": "Classic Cartoons",
+    "url": "W0Rb3v7J1ZQ",
+    "icon":"images/cartoon.png",
+    "type": "youtube"
+  }, 
+
+  {
+    "name": "SpongeBob",
+    "url": "v8CH1Sh3Mio",
+    "icon":"images/sponge.png",
+    "type": "youtube"
+  },
+
+  {
     "name": "Zoomoo kids",
     "url": "https://zoomoo-samsungau.amagi.tv/playlist1080p.m3u8",
     "icon":"images/Zoomoo kids.png",
@@ -578,7 +599,7 @@
 
   {
     "name": "karbala",
-    "url": "HUiHTw8u32g",
+    "url": "BarpQQCi48c",
     "icon":"images/karbala.png",
     "type": "youtube"
   },
@@ -1012,5 +1033,20 @@
     "url": "https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol.m3u8",
     "icon":"images/bein.png",
      "type": "hls"
-  }
+  },
+
+  {
+    "name": "MBC 2",
+    "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-2/51db9d7fa48a27d051f1eecb68069151/index.mpd",
+    "icon": "images/bein.png",
+     "type": "iptv"
+  },
+
+
+  {
+  "name": "Majid",
+  "icon": "image/majid.png",
+  "url": "https://admn-live-cdn-lb.starzplayarabia.com/out/v1/admn_tv/majid/majid_dash_enc/index.mpd",
+  "type": "iptv"
+}
 ]
